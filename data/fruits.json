@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+    "name": "Apple",
+    "price": 1.99,
+    "quantity": 100,
+    "category": "Fresh",
+    "description": "Fresh red apples from local orchards. Rich in fiber and vitamin C.",
+    "created_at": "2023-01-15 10:30:00",
+    "updated_at": "2023-01-15 10:30:00"
+  },
+  {
+    "id": "2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+    "name": "Banana",
+    "price": 0.99,
+    "quantity": 150,
+    "category": "Fresh",
+    "description": "Yellow bananas imported from Ecuador. High in potassium.",
+    "created_at": "2023-01-15 10:35:00",
+    "updated_at": "2023-01-15 10:35:00"
+  },
+  {
+    "id": "3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+    "name": "Orange",
+    "price": 1.49,
+    "quantity": 80,
+    "category": "Fresh",
+    "description": "Juicy oranges from Florida. Excellent source of vitamin C.",
+    "created_at": "2023-01-15 10:40:00",
+    "updated_at": "2023-01-15 10:40:00"
+  },
+  {
+    "id": "4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+    "name": "Mango",
+    "price": 2.99,
+    "quantity": 40,
+    "category": "Exotic",
+    "description": "Sweet mangoes from Mexico. Perfect for smoothies and desserts.",
+    "created_at": "2023-01-15 10:45:00",
+    "updated_at": "2023-01-15 10:45:00"
+  },
+  {
+    "id": "5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
+    "name": "Blueberries",
+    "price": 4.99,
+    "quantity": 30,
+    "category": "Fresh",
+    "description": "Organic blueberries. Rich in antioxidants and perfect for baking.",
+    "created_at": "2023-01-15 10:50:00",
+    "updated_at": "2023-01-15 10:50:00"
+  },
+  {
+    "id": "6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u",
+    "name": "Strawberries",
+    "price": 3.99,
+    "quantity": 25,
+    "category": "Fresh",
+    "description": "Sweet and juicy strawberries. Great for desserts or eating fresh.",
+    "created_at": "2023-01-15 10:55:00",
+    "updated_at": "2023-01-15 10:55:00"
+  },
+  {
+    "id": "7g8h9i0j-1k2l-3m4n-5o6p-7q8r9s0t1u2v",
+    "name": "Pineapple",
+    "price": 3.49,
+    "quantity": 20,
+    "category": "Exotic",
+    "description": "Sweet and tangy pineapples from Hawaii. Great for fruit salads.",
+    "created_at": "2023-01-15 11:00:00",
+    "updated_at": "2023-01-15 11:00:00"
+  },
+  {
+    "id": "8h9i0j1k-2l3m-4n5o-6p7q-8r9s0t1u2v3w",
+    "name": "Grapes",
+    "price": 2.99,
+    "quantity": 50,
+    "category": "Fresh",
+    "description": "Seedless green grapes. Sweet and refreshing snack.",
+    "created_at": "2023-01-15 11:05:00",
+    "updated_at": "2023-01-15 11:05:00"
+  },
+  {
+    "id": "9i0j1k2l-3m4n-5o6p-7q8r-9s0t1u2v3w4x",
+    "name": "Dried Apricots",
+    "price": 5.99,
+    "quantity": 15,
+    "category": "Dried",
+    "description": "Naturally sweet dried apricots. No added sugar or preservatives.",
+    "created_at": "2023-01-15 11:10:00",
+    "updated_at": "2023-01-15 11:10:00"
+  },
+  {
+    "id": "0j1k2l3m-4n5o-6p7q-8r9s-0t1u2v3w4x5y",
+    "name": "Frozen Berries Mix",
+    "price": 6.99,
+    "quantity": 20,
+    "category": "Frozen",
+    "description": "Mix of frozen strawberries, blueberries, and raspberries. Perfect for smoothies.",
+    "created_at": "2023-01-15 11:15:00",
+    "updated_at": "2023-01-15 11:15:00"
+  }
+]
