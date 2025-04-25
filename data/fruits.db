@@ -1,0 +1,104 @@
+import sqlite3
+import os
+from datetime import datetime
+
+# Ensure the data directory exists
+os.makedirs('data', exist_ok=True)
+
+# Connect to the database (creates it if it doesn't exist)
+conn = sqlite3.connect('data/fruits.db')
+cursor = conn.cursor()
+
+# Create tables
+cursor.executescript('''
+-- Fruits table
+CREATE TABLE IF NOT EXISTS fruits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 0,
+    price REAL NOT NULL DEFAULT 0.0,
+    storage_location TEXT,
+    expiry_date TEXT,
+    added_date TEXT DEFAULT CURRENT_DATE
+);
+
+-- Categories table
+CREATE TABLE IF NOT EXISTS categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE
+);
+
+-- Fruit-Category relationship table (many-to-many)
+CREATE TABLE IF NOT EXISTS fruit_categories (
+    fruit_id INTEGER,
+    category_id INTEGER,
+    PRIMARY KEY (fruit_id, category_id),
+    FOREIGN KEY (fruit_id) REFERENCES fruits (id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE
+);
+
+-- Create indexes for better performance
+CREATE INDEX IF NOT EXISTS idx_fruits_name ON fruits (name);
+CREATE INDEX IF NOT EXISTS idx_fruits_expiry ON fruits (expiry_date);
+CREATE INDEX IF NOT EXISTS idx_categories_name ON categories (name);
+''')
+
+# Insert some sample data
+today = datetime.now().date().isoformat()
+
+# Sample categories
+sample_categories = [
+    ('Citrus',),
+    ('Berries',),
+    ('Tropical',),
+    ('Stone Fruits',),
+    ('Melons',)
+]
+
+cursor.executemany('INSERT OR IGNORE INTO categories (name) VALUES (?)', sample_categories)
+
+# Sample fruits
+sample_fruits = [
+    ('Apple', 100, 0.99, 'Bin A1', (datetime.now().date().replace(day=datetime.now().day + 14)).isoformat(), today),
+    ('Banana', 150, 0.59, 'Bin B2', (datetime.now().date().replace(day=datetime.now().day + 5)).isoformat(), today),
+    ('Orange', 80, 0.79, 'Bin C3', (datetime.now().date().replace(day=datetime.now().day + 10)).isoformat(), today),
+    ('Strawberry', 50, 2.99, 'Refrigerator D4', (datetime.now().date().replace(day=datetime.now().day + 3)).isoformat(), today),
+    ('Mango', 30, 1.99, 'Bin E5', (datetime.now().date().replace(day=datetime.now().day + 7)).isoformat(), today),
+    ('Peach', 45, 1.49, 'Bin F6', (datetime.now().date().replace(day=datetime.now().day + 4)).isoformat(), today),
+    ('Watermelon', 15, 3.99, 'Floor G7', (datetime.now().date().replace(day=datetime.now().day + 12)).isoformat(), today)
+]
+
+cursor.executemany('''
+    INSERT INTO fruits (name, quantity, price, storage_location, expiry_date, added_date)
+    VALUES (?, ?, ?, ?, ?, ?)
+''', sample_fruits)
+
+# Associate fruits with categories
+# Get fruit IDs
+cursor.execute('SELECT id, name FROM fruits')
+fruit_ids = {name: id for id, name in cursor.fetchall()}
+
+# Get category IDs
+cursor.execute('SELECT id, name FROM categories')
+category_ids = {name: id for id, name in cursor.fetchall()}
+
+# Create associations
+fruit_category_associations = [
+    (fruit_ids['Orange'], category_ids['Citrus']),
+    (fruit_ids['Strawberry'], category_ids['Berries']),
+    (fruit_ids['Mango'], category_ids['Tropical']),
+    (fruit_ids['Peach'], category_ids['Stone Fruits']),
+    (fruit_ids['Watermelon'], category_ids['Melons']),
+    (fruit_ids['Banana'], category_ids['Tropical'])
+]
+
+cursor.executemany('''
+    INSERT INTO fruit_categories (fruit_id, category_id)
+    VALUES (?, ?)
+''', fruit_category_associations)
+
+# Commit changes and close connection
+conn.commit()
+conn.close()
+
+print("Database initialized successfully with sample data!")
