@@ -4,22 +4,22 @@ import os
 import uuid
 from datetime import datetime
 
-# Set page configuration
+
 st.set_page_config(
     page_title="Fruit Store CRUD",
     page_icon="🍎",
     layout="wide"
 )
 
-# Initialize data directory and file
+
 DATA_DIR = "data"
 DATA_FILE = os.path.join(DATA_DIR, "fruits.json")
 
-# Create data directory if it doesn't exist
+
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
-# Load data function
+
 def load_data():
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
@@ -33,12 +33,12 @@ def load_data():
             json.dump([], f)
         return []
 
-# Save data function
+
 def save_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
 
-# Initialize session state
+
 if 'fruits' not in st.session_state:
     st.session_state.fruits = load_data()
 if 'edit_mode' not in st.session_state:
@@ -46,10 +46,10 @@ if 'edit_mode' not in st.session_state:
 if 'edit_id' not in st.session_state:
     st.session_state.edit_id = None
 
-# Main title
+
 st.title("🍎 Fruit Store Inventory Management")
 
-# Sidebar for adding/editing fruits
+
 with st.sidebar:
     st.header("Add/Edit Fruit")
     
@@ -122,13 +122,13 @@ with st.sidebar:
             st.session_state.description = ""
             st.experimental_rerun()
 
-# Main content area
+
 st.header("Fruit Inventory")
 
-# Search functionality
+
 search_term = st.text_input("Search fruits", "")
 
-# Filter fruits based on search term
+
 filtered_fruits = st.session_state.fruits
 if search_term:
     filtered_fruits = [
@@ -138,7 +138,7 @@ if search_term:
            search_term.lower() in fruit["description"].lower()
     ]
 
-# Display fruits in a table
+
 if not filtered_fruits:
     st.info("No fruits in inventory. Add some from the sidebar!")
 else:
@@ -186,24 +186,24 @@ else:
         
         st.markdown("---")
 
-# Statistics section
+
 if st.session_state.fruits:
     st.header("Inventory Statistics")
     
     col1, col2, col3 = st.columns(3)
     
-    # Total number of fruits
+    
     col1.metric("Total Fruit Types", len(st.session_state.fruits))
     
-    # Total inventory value
+   
     total_value = sum(fruit["price"] * fruit["quantity"] for fruit in st.session_state.fruits)
     col2.metric("Total Inventory Value", f"${total_value:.2f}")
     
-    # Total quantity
+   
     total_quantity = sum(fruit["quantity"] for fruit in st.session_state.fruits)
     col3.metric("Total Fruit Items", total_quantity)
     
-    # Category distribution
+    
     st.subheader("Category Distribution")
     category_counts = {}
     for fruit in st.session_state.fruits:
